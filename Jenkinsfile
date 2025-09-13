@@ -3,16 +3,16 @@ pipeline {
 
     environment {
         DOCKER_HUB_USER = 'mohan2366'     // Docker Hub username
-        IMAGE_NAME = 'hotstar'            // Docker Hub repository name
+        IMAGE_NAME = 'Netflix'            // Docker Hub repository name
         IMAGE_TAG = 'v1'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                     credentialsId: 'mohan2531253', 
-                    url: 'https://github.com/mohan2531253/hotstarby.git'
+                    url: 'https://github.com/mohan2531253/Flixclusive.git'
             }
         }
 
@@ -44,10 +44,10 @@ pipeline {
         stage('Docker Swarm Deploy') {
             steps {
                 sh '''
-                docker service rm hotserv || true
+                docker service netserv || true
                 docker service create \
                   --name hotserv \
-                  -p 8008:8080 \
+                  -p 800:8080 \
                   --replicas 3 \
                   $DOCKER_HUB_USER/$IMAGE_NAME:$IMAGE_TAG
                 '''
